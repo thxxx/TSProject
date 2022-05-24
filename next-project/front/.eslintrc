@@ -1,0 +1,25 @@
+{
+    "parserOptions":{
+        "ecmaVersion":2022, // 최신 문법
+        "sourceType":"module", // 스크립트 말고 모듈 : import, export
+        "ecmaFeatures":{
+            "jsx":true
+        }
+    },
+    "env":{
+        "browser":true,
+        "node":true,
+        "es6":true
+    },
+    "extends":[ // 실질적인 규칙. 지금 둘은 아주 너그러운 규칙
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
+    "pluguns":[
+        "import",
+        "react-hooks" // 아까 받은 플러그인들
+    ],
+    "rules":{
+
+    }
+}
