@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import Link from "next/link";
 import { Input, Button } from "@chakra-ui/react";
 import styled from "@emotion/styled";
+import { useSelector } from "react-redux";
 
 import LoginForm from "./Layout/LoginForm";
 import UserProfile from "./Layout/UserProfile";
@@ -16,7 +17,7 @@ const TopLayout = styled.div({
 });
 
 const Layout = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
   return (
     <>
@@ -30,11 +31,7 @@ const Layout = ({ children }) => {
           <a>회원가입</a>
         </Link>
       </TopLayout>
-      {isLoggedIn ? (
-        <UserProfile setIsLoggedIn={setIsLoggedIn} />
-      ) : (
-        <LoginForm setIsLoggedIn={setIsLoggedIn} />
-      )}
+      {isLoggedIn ? <UserProfile /> : <LoginForm />}
       {children}
     </>
   );

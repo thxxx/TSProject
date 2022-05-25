@@ -1,24 +1,19 @@
 import Layout from "../components/Layout";
+import { useSelector } from "react-redux";
 import { Grid, GridItem } from "@chakra-ui/react";
+import PostForm from "../components/Main/PostForm";
+import PostCard from "../components/Main/PostCard";
 
 const Home = () => {
+  const { isLoggedIn } = useSelector((state) => state.user);
+  const { mainPosts } = useSelector((state) => state.post);
+
   return (
     <Layout>
-      <div>Hello, Next!</div>
-      <Grid
-        h="200px"
-        templateRows="repeat(2, 1fr)"
-        templateColumns="repeat(5, 1fr)"
-        gap={2}>
-        <GridItem rowSpan={2} colSpan={1} bg="tomato">
-          <div style={{ width: "100px", margin: "auto auto" }}>
-            블로그로 가기
-          </div>
-        </GridItem>
-        <GridItem colSpan={2} bg="papayawhip" />
-        <GridItem colSpan={2} bg="papayawhip" />
-        <GridItem colSpan={4} bg="tomato" />
-      </Grid>
+      {isLoggedIn && <PostForm />}
+      {mainPosts.map((item, index) => (
+        <PostCard key={item.id} post={item} />
+      ))}
     </Layout>
   );
 };

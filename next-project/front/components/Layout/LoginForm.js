@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from "react";
+import { useDispatch } from "react-redux";
 import {
   FormControl,
   Form,
@@ -9,17 +10,20 @@ import {
   FormHelperText,
   FormErrorMessage,
 } from "@chakra-ui/react";
+import { loginAction } from "../../reducers/user"; // index기 때문에 굳이 안붙여줘도 된다.
 
-const LoginForm = ({ setIsLoggedIn }) => {
+const LoginForm = () => {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
 
-  const isError = email === "";
+  const onSubmitForm = useCallback(() => {
+    console.log(email);
+    // setIsLoggedIn(true);
+    dispatch(loginAction({ email }));
+  }, [email]);
 
   return (
-    <form
-      onSubmit={() => {
-        setIsLoggedIn(true);
-      }}>
+    <form onSubmit={onSubmitForm}>
       <Input
         id="email"
         type="email"
