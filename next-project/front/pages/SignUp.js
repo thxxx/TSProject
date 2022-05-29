@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useMemo } from "react";
 import useInput from "../components/hooks/useInput";
+import useToggle from "../components/hooks/useToggle";
 import Layout from "../components/Layout";
 import { Input, Button, Checkbox } from "@chakra-ui/react";
 
@@ -7,11 +8,7 @@ const SignUp = () => {
   const [id, onChangeId] = useInput("");
   const [nickName, onChangeNickName] = useInput("");
   const [password, setPassword] = useState("");
-  const [term, setTerm] = useState(false);
-
-  const onChangeTerm = useCallback((e) => {
-    setTerm(e.target.checked);
-  }, []);
+  const [term, toggleTerm] = useToggle(false);
 
   const onChangePassword = useCallback((e) => {
     setPassword(e.target.value);
@@ -54,7 +51,7 @@ const SignUp = () => {
           onChange={onChangePassword}
           placeholder="사용하실 비밀번호를 입력해주세요."
         />
-        <Checkbox value={term} onChange={onChangeTerm}>
+        <Checkbox value={term} onChange={toggleTerm}>
           개인정보 약관에 동의합니다.
         </Checkbox>
         <Button type="submit">회원가입</Button>

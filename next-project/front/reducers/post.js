@@ -11,8 +11,12 @@ export const initialState = {
         {
           src:
             "https://imgnews.pstatic.net/image/076/2022/05/25/2022052601002069400139271_20220525161103688.jpg?type=w647",
+        },
+        {
           src:
             "https://imgnews.pstatic.net/image/421/2022/05/25/0006116775_001_20220525152301703.jpg?type=w647",
+        },
+        {
           src:
             "https://imgnews.pstatic.net/image/421/2022/05/25/0006116775_002_20220525152301876.jpg?type=w647",
         },
@@ -44,9 +48,11 @@ export const initialState = {
 };
 
 const ADD_POST = "ADD_POST";
+
 export const addPost = {
   type: ADD_POST,
 };
+
 const dummyPost = {
   id: 2,
   content: "더미데이터입니다.",
