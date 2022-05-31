@@ -44,7 +44,7 @@ const PostImages = ({ images }) => {
   );
 };
 
-PostImages.PropTypes = {
+PostImages.propTypes = {
   images: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 

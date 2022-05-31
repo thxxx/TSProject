@@ -1,26 +1,22 @@
 import React, { useState, useCallback } from "react";
-import { useDispatch } from "react-redux";
-import {
-  FormControl,
-  Form,
-  Formik,
-  FormLabel,
-  Button,
-  Input,
-  FormHelperText,
-  FormErrorMessage,
-} from "@chakra-ui/react";
-import { loginAction } from "../../reducers/user"; // index기 때문에 굳이 안붙여줘도 된다.
+import { useDispatch, useSelector } from "react-redux";
+import { Button, Input } from "@chakra-ui/react";
+import { loginRequestAction } from "../../reducers/user"; // index기 때문에 굳이 안붙여줘도 된다.
 
 const LoginForm = () => {
   const dispatch = useDispatch();
+  const { isLoggingIn } = useSelector((state) => state.user);
   const [email, setEmail] = useState("");
 
-  const onSubmitForm = useCallback(() => {
-    console.log(email);
-    // setIsLoggedIn(true);
-    dispatch(loginAction({ email }));
-  }, [email]);
+  const onSubmitForm = useCallback(
+    (e) => {
+      e.preventDefault();
+      console.log("입력한 이메일", e);
+      // setIsLoggedIn(true);
+      dispatch(loginRequestAction({ email }));
+    },
+    [email]
+  );
 
   return (
     <form onSubmit={onSubmitForm}>
@@ -33,8 +29,8 @@ const LoginForm = () => {
           setEmail(e.currentTarget.value);
         }, [])}
       />
-      <Button mt={4} colorScheme="teal" type="submit">
-        Submit
+      <Button mt={4} colorScheme="teal" type="submit" isLoading={isLoggingIn}>
+        로그인
       </Button>
     </form>
   );

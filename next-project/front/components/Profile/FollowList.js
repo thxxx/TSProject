@@ -32,7 +32,11 @@ export const Lists = ({ data, children }) => {
   return (
     <ListContainer>
       {data.map((item, index) => {
-        return <div style={style}>{item.name}</div>;
+        return (
+          <div style={style} key={item.id}>
+            {item.name}
+          </div>
+        );
       })}
       {children}
     </ListContainer>

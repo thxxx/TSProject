@@ -14,7 +14,7 @@ const Comments = ({ comments, id }) => {
       {comments.length}개의 댓글
       {comments.map((item, index) => {
         return (
-          <CommentsOne>
+          <CommentsOne key={index}>
             <div>{item.User.nickname}님의 댓글</div>
             <div>{item.content}</div>
           </CommentsOne>
@@ -24,7 +24,7 @@ const Comments = ({ comments, id }) => {
   );
 };
 
-Comments.PropTypes = {
+Comments.propTypes = {
   comments: PropTypes.arrayOf(PropTypes.object).isRequired,
   id: PropTypes.string.isRequired,
 };

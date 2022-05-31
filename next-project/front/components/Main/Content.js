@@ -8,7 +8,7 @@ const Content = ({ content }) => {
         {content.split(/(#[^/s#]+)/g).map((item, index) => {
           if (item[0] == "#") {
             return (
-              <Link href="/Profile">
+              <Link href="/Profile" key={index}>
                 <a>{item}</a>
               </Link>
             );
