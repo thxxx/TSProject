@@ -32,7 +32,7 @@ const PostForm = () => {
         <Button onClick={onImageInput} onChange={onImageChange}>
           이미지 업로드
         </Button>
-        <Button type="primary" style={{ float: "right" }} htmlType="submit">
+        <Button type="primary" style={{ float: "right" }} onClick={onSubmit}>
           짹짹
         </Button>
       </div>

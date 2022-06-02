@@ -17,7 +17,7 @@ import {
   LOG_OUT_REQUEST,
   LOG_OUT_SUCCESS,
   LOG_OUT_FAILURE,
-} from "../reducers";
+} from "../reducers/user";
 
 function logInAPI(data) {
   return axios.post("/api/login", data);
@@ -25,8 +25,8 @@ function logInAPI(data) {
 
 function* logIn(action) {
   // 여기에 자동으로 매개변수로 action이 전달된다.
+  console.log("사가 start");
   try {
-    console.log("사가 start");
     // const result = yield call(logInAPI, action.data);
     yield delay(1000);
     yield put({
@@ -63,7 +63,8 @@ function* logOut(action) {
 }
 
 function* watchLogIn() {
-  yield takeEvery(LOG_IN_REQUEST, logIn); // LOG_IN_REQUEST 이라는 액션이 실행될 때 까지 기다렸다가 logIn을 실행하겠다.
+  console.log("체크체크는 되나?");
+  yield takeEvery("LOG_IN_REQUEST", logIn); // LOG_IN_REQUEST 이라는 액션이 실행될 때 까지 기다렸다가 logIn을 실행하겠다.
 } // 이벤트리스너 처럼 LOG_IN이 들어오면 뒤의 함수를 실행하도록.
 
 function* watchLogOut() {
@@ -71,5 +72,6 @@ function* watchLogOut() {
 } // 이벤트리스너 처럼 LOG_IN이 들어오면 뒤의 함수를 실행하도록.
 
 export default function* userSaga() {
+  console.log("체크체크는 되나?1111");
   yield all([fork(watchLogIn), fork(watchLogOut)]);
 }
