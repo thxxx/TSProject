@@ -29,6 +29,7 @@ const Card = styled.div({
 });
 
 const PostCard = ({ post }) => {
+  console.log("리렌더링 22");
   const id = useSelector((state) => state.user.me?.id);
   const [commentOpen, handleCommentOpen] = useToggle(false);
 

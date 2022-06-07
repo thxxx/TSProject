@@ -3,9 +3,14 @@ import useInput from "../components/hooks/useInput";
 import useToggle from "../components/hooks/useToggle";
 import Layout from "../components/Layout";
 import { Input, Button, Checkbox } from "@chakra-ui/react";
+import { useDispatch, useSelector } from "react-redux";
+import { SIGN_UPP_REQUEST } from "../reducers/user";
 
 const SignUp = () => {
-  const [id, onChangeId] = useInput("");
+  const dispatch = useDispatch();
+  const { isSignUpLoading } = useSelector((state) => state.user);
+
+  const [email, onChangeEmail] = useInput("");
   const [nickName, onChangeNickName] = useInput("");
   const [password, setPassword] = useState("");
   const [term, toggleTerm] = useToggle(false);
@@ -14,14 +19,21 @@ const SignUp = () => {
     setPassword(e.target.value);
   }, []);
 
-  const submit = (e) => {
-    e.preventDefault();
-    if (term) {
-      console.log("제출");
-    } else {
-      console.log("동의해주세여");
-    }
-  };
+  const submit = useCallback(
+    (e) => {
+      e.preventDefault();
+      if (!term) {
+        console.log("동의해주세여");
+      } else {
+        console.log(email, password, nickName);
+        dispatch({
+          type: SIGN_UPP_REQUEST,
+          data: { email, password, nickName },
+        });
+      }
+    },
+    [email, password, nickName]
+  );
 
   const titleStyle = useMemo(
     () => ({
@@ -36,8 +48,8 @@ const SignUp = () => {
       <div style={titleStyle}>회원가입</div>
       <form onSubmit={submit}>
         <Input
-          value={id}
-          onChange={onChangeId}
+          value={email}
+          onChange={onChangeEmail}
           placeholder="사용하실 아이디를 입력해주세요."
         />
         <Input
@@ -54,7 +66,9 @@ const SignUp = () => {
         <Checkbox value={term} onChange={toggleTerm}>
           개인정보 약관에 동의합니다.
         </Checkbox>
-        <Button type="submit">회원가입</Button>
+        <Button type="submit" loading={isSignUpLoading}>
+          회원가입
+        </Button>
       </form>
     </Layout>
   );

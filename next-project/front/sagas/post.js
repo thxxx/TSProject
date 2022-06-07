@@ -1,36 +1,63 @@
-import {
-  call,
-  all,
-  fork,
-  take,
-  takeEvery,
-  throttle,
-  delay,
-} from "redux-saga/effects";
+import { all, fork, put, takeLatest, delay } from "redux-saga/effects";
 
-function addPostAPI() {
-  // return axios.post('/api/login')
+import {
+  ADD_POST_REQUEST,
+  ADD_POST_SUCCESS,
+  ADD_POST_FAILURE,
+  ADD_COMMENT_SUCCESS,
+  ADD_COMMENT_REQUEST,
+  ADD_COMMENT_FAILURE,
+} from "../reducers/post";
+
+function addPostAPI(data) {
+  return axios.post("/api/post", data);
 }
 
-function* addPost() {
+function* addPost(action) {
+  console.log("애드 시도");
   try {
-    const result = yield call(addPostAPI);
+    // const result = yield call(addPostAPI);
+    yield delay(1000);
     yield put({
-      type: "ADD_POST_SUCCESS",
-      data: result.data,
+      type: ADD_POST_SUCCESS,
+      data: action.data,
     });
   } catch (err) {
     yield put({
-      type: "ADD_POST_FAILURE",
+      type: ADD_POST_FAILURE,
+      data: err.response.data,
+    });
+  }
+}
+function addCommentAPI(data) {
+  return axios.post("/api/post", data);
+}
+
+function* addComment(action) {
+  try {
+    // const result = yield call(addPostAPI);
+    yield delay(1000);
+    yield put({
+      type: ADD_COMMENT_SUCCESS,
+      data: action.data,
+    });
+  } catch (err) {
+    yield put({
+      type: ADD_COMMENT_FAILURE,
       data: err.response.data,
     });
   }
 }
 
 function* watchAddPost() {
-  yield takeEvery("ADD_POST_REQUEST", addPost);
+  console.log("아까ㅣ지?");
+  yield takeLatest(ADD_POST_REQUEST, addPost);
+}
+
+function* watchAddComment() {
+  yield takeLatest(ADD_COMMENT_REQUEST, addComment);
 }
 
 export default function* postSaga() {
-  yield all([fork(watchAddPost)]);
+  yield all([fork(watchAddPost), fork(watchAddComment)]);
 }

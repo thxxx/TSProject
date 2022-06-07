@@ -1,18 +1,27 @@
-import React, { useCallback, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import useInput from "../hooks/useInput";
 import { Textarea, Button } from "@chakra-ui/react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addPost } from "../../reducers/post";
 
 const PostForm = () => {
   const dispatch = useDispatch();
   const imageInput = useRef();
   const [text, onChangeText] = useInput();
+  const { addPostDone } = useSelector((state) => state.post);
 
-  const onSubmit = useCallback((e) => {
-    e.preventDefault();
-    dispatch(addPost);
-  }, []);
+  useEffect(() => {
+    if (addPostDone) {
+    }
+  }, [addPostDone]);
+
+  const onSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      dispatch(addPost(text));
+    },
+    [text]
+  );
 
   const onImageInput = useCallback(() => {
     imageInput.current.click();

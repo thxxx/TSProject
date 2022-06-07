@@ -2,14 +2,23 @@ import React, { useCallback } from "react";
 import { Textarea, Button } from "@chakra-ui/react";
 import useInput from "../hooks/useInput";
 import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+import { ADD_COMMENT_REQUEST } from "../../reducers/post";
 
 const CommentForm = ({ post }) => {
   const [commentText, handleCommentText] = useInput();
+  const dispatch = useDispatch();
 
-  const submitComment = useCallback((e) => {
-    e.preventDefault();
-    console.log(commentText);
-  }, []);
+  const submitComment = useCallback(
+    (e) => {
+      e.preventDefault();
+      dispatch({
+        type: ADD_COMMENT_REQUEST,
+        data: { content: commentText, postId: post.id },
+      });
+    },
+    [commentText]
+  );
 
   return (
     <div>

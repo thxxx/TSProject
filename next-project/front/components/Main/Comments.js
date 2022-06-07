@@ -29,4 +29,4 @@ Comments.propTypes = {
   id: PropTypes.string.isRequired,
 };
 
-export default Comments;
+export default React.memo(Comments);
