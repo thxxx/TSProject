@@ -28,3 +28,22 @@ const add = (a, b, c) => {
 };
 add(1, 2);
 add(1, 2, 3); // 둘 다 가능해진다!
+const superPrint = (arr) => arr[0];
+const a = superPrint([1, 2, 3]);
+superPrint([true, false, true]);
+superPrint([1, false, true]);
+superPrint([true, "false", true]);
+console.log(a);
+const pprint = (arr) => false;
+const ww = pprint([1, 2, 3]);
+const ji = {
+    name: "hoji",
+    extraInfo: {
+        favFood: "HOWI",
+    },
+};
+const jae = {
+    name: "jaeun",
+    extraInfo: null,
+};
+const awfe = [1, 2, 3];

@@ -13,7 +13,7 @@ const Home = () => {
     <Layout>
       {isLoggedIn && <PostForm />}
       {mainPosts.map((post) => (
-        <PostCard key={item.id} post={post} />
+        <PostCard key={post.id} post={post} />
       ))}
     </Layout>
   );

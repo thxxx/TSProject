@@ -14,6 +14,7 @@ const TopLayout = styled.div({
   alignItems: "center",
   justifyContent: "space-around",
   margin: "10px",
+  bacgroundColor: "rgba(255,255,255,1)",
 });
 
 const Layout = ({ children }) => {
@@ -30,6 +31,7 @@ const Layout = ({ children }) => {
         <Link href="/SignUp">
           <a>회원가입</a>
         </Link>
+        <div style={{ backgroundColor: "rgba(255,0,0,0.5)" }}>ㅇ아아아아</div>
       </TopLayout>
       {isLoggedIn ? <UserProfile /> : <LoginForm />}
       {children}
